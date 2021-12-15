@@ -6,6 +6,7 @@
     <title>Connexion</title>
     <meta name="description" content="Login page example" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="canonical" href="https://keenthemes.com/metronic" />
     <!--begin::Fonts-->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" />
@@ -55,64 +56,47 @@
                 <div class="d-flex flex-column-fluid flex-column flex-center">
 
                     <!--begin::Signin-->
-                    <div class="login-form login-signin py-11">
+                    <div class="py-11">
 
-                        @if(isset(Auth::user()->pseudo))
-                            <script>window.location="/auth/success";</script>
-                        @endif
-
-                        @if ($message = Session::get('error'))
-                            <div class="alert alert-danger alert-block">
-                                <button type="button" class="close" data-dismiss="alert">×</button>
-                                <strong>{{ $message }}</strong>
+                        <!--begin::Title-->
+                        <div class="text-center pb-8">
+                            <h2 class="font-weight-bolder text-dark font-size-h2 font-size-h1-lg">Registration</h2>
+                            <span class="text-muted font-weight-bold font-size-h4">Create your account</span>
+                        </div>
+                        <br>
+                        <br>
+                        <!--end::Title-->
+                        <!--begin::Form group-->
+                        <div class="form-group">
+                            <label class="font-size-h6 font-weight-bolder text-dark">First Name</label>
+                            <input class="form-control form-control-solid h-auto py-7 px-6 rounded-lg" type="text" id="first_name" autocomplete="off" />
+                        </div>
+                        <!--end::Form group-->
+                        <!--begin::Form group-->
+                        <div class="form-group">
+                            <label class="font-size-h6 font-weight-bolder text-dark">Last Name</label>
+                            <input class="form-control form-control-solid h-auto py-7 px-6 rounded-lg" type="text" id="last_name" autocomplete="off" />
+                        </div>
+                        <!--end::Form group-->
+                        <!--begin::Form group-->
+                        <div class="form-group">
+                            <label class="font-size-h6 font-weight-bolder text-dark">Email</label>
+                            <input class="form-control form-control-solid h-auto py-7 px-6 rounded-lg" type="text" id="email" autocomplete="off" />
+                        </div>
+                        <!--end::Form group-->
+                        <!--begin::Form group-->
+                        <div class="form-group">
+                            <div class="d-flex justify-content-between mt-n5">
+                                <label class="font-size-h6 font-weight-bolder text-dark pt-5">Password</label>
                             </div>
-                        @endif
-
-                        @if (count($errors) > 0)
-                            <div class="alert alert-danger">
-                                <ul>
-                                    @foreach($errors->all() as $error)
-                                        <li>{{ $error }}</li>
-                                    @endforeach
-                                </ul>
-                            </div>
-                        @endif
-
-                        <!--begin::Form-->
-                        <form class="form" method="post" action="{{ url('/auth/check') }}">
-                        {{ csrf_field() }}
-                            <!--begin::Title-->
-                            <div class="text-center pb-8">
-                                <h2 class="font-weight-bolder text-dark font-size-h2 font-size-h1-lg">Connexion</h2>
-                                <span class="text-muted font-weight-bold font-size-h4">Access to your personal space</span>
-                            </div>
-                            <br>
-                            <br>
-                            <!--end::Title-->
-                            <!--begin::Form group-->
-                            <div class="form-group">
-                                <label class="font-size-h6 font-weight-bolder text-dark">Email</label>
-                                <input class="form-control form-control-solid h-auto py-7 px-6 rounded-lg" type="text" name="email" autocomplete="off" />
-                            </div>
-                            <!--end::Form group-->
-                            <!--begin::Form group-->
-                            <div class="form-group">
-                                <div class="d-flex justify-content-between mt-n5">
-                                    <label class="font-size-h6 font-weight-bolder text-dark pt-5">Password</label>
-                                </div>
-                                <input class="form-control form-control-solid h-auto py-7 px-6 rounded-lg" type="password" name="password" autocomplete="off" />
-                            </div>
-                            <!--end::Form group-->
-                            <!--begin::Action-->
-                            <div class="text-center pt-2">
-                                <input type="submit" name="login" class="btn btn-dark font-weight-bolder font-size-h6 px-8 py-4 my-3" value="Log in" />
-                            </div>
-                            <div class="text-center pt-2">
-                                <a href="{{route('register')}}" class="btn btn-dark font-weight-bolder font-size-h6 px-8 py-4 my-3" id="Create_account">Create an account</a>
-                            </div>
-                            <!--end::Action-->
-                        </form>
-                        <!--end::Form-->
+                            <input class="form-control form-control-solid h-auto py-7 px-6 rounded-lg" type="password" id="password" autocomplete="off" />
+                        </div>
+                        <!--end::Form group-->
+                        <!--begin::Action-->
+                        <div class="text-center pt-2">
+                            <button class="btn btn-dark font-weight-bolder font-size-h6 px-8 py-4 my-3" id="Create_account" onclick="Create_user()">Create an account</button>
+                        </div>
+                        <!--end::Action-->
                     </div>
                     <!--end::Signin-->
                 </div>
@@ -140,9 +124,34 @@
 <script src="{{asset('assets/plugins/global/plugins.bundle.js')}}"></script>
 <script src="{{asset('assets/plugins/custom/prismjs/prismjs.bundle.js')}}"></script>
 <script src="{{asset('assets/js/scripts.bundle.js')}}"></script>
-<script src="{{asset('assets/js/engage_code.js')}}"></script>
-<script src="{{asset('assets/js/pages/custom/login/login-general.js?v=7.2.8')}}"></script>
-<!--end::Page Scripts-->
+
+<script>
+
+    function Create_user(){
+
+        $('#Create_account').addClass('spinner spinner-white spinner-right');
+
+        $.ajax({
+            url: "{{url('user/create')}}",
+            type: 'POST',
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            data:{
+                'first_name': $('#first_name').val(),
+                'last_name': $('#last_name').val(),
+                'email': $('#email').val(),
+                'password': $('#password').val(),
+            },
+            success: function (response) {
+                console.log(response);
+                window.location.replace("{{route('login')}}")
+            }
+        });
+
+    }
+
+</script>
+
 </body>
-<!--end::Body-->
 </html>
