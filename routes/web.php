@@ -41,3 +41,21 @@ Route::get('/manage_bus', function () {
     return view('manage_bus');
 })
     ->name('manage_bus');
+
+Route::get('/login', function () {
+
+    return view('login');
+})
+    ->name('login');
+
+Route::get('/register', function () {
+
+    return view('register');
+})
+    ->name('register');
+
+Route::post('auth/check', 'App\Http\Controllers\Auth\LoginController@checklogin');
+Route::get('auth/success', 'App\Http\Controllers\Auth\LoginController@successlogin');
+Route::get('auth/logout', 'App\Http\Controllers\Auth\LoginController@logout')->name('auth.logout');
+
+Route::post('user/create', 'App\Http\Controllers\Auth\CreateUserController@Create');
