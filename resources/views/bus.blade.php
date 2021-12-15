@@ -1,9 +1,8 @@
 @extends('layouts.app')
 
-{{-- @section('title', 'Tableau de bord')
+@section('title', 'Bus')
 @section('header.title', 'Partenaires Particuliers')
-@section('breadcumb.first.title', 'ACCUEIL')
-@section('breadcumb.second.title', 'PRESENTATION') --}}
+@section('breadcumb.first.title', 'BUS')
 
 @section('page.content')
 
