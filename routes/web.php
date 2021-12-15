@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Models\User as User;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,3 +23,21 @@ Route::get('/home', function () {
     return view('home');
 })
     ->name('home');
+
+Route::get('/offers', function () {
+
+    return view('offers');
+})
+    ->name('offers');
+
+Route::get('/bus', function () {
+
+    return view('bus');
+})
+    ->name('bus');
+
+Route::get('/manage_bus', function () {
+
+    return view('manage_bus');
+})
+    ->name('manage_bus');

@@ -1,8 +1,8 @@
 @extends('layouts.app')
 
-@section('title', 'Home')
+@section('title', 'Bus')
 @section('header.title', 'Partenaires Particuliers')
-@section('breadcumb.first.title', 'HOME')
+@section('breadcumb.first.title', 'BUS')
 
 @section('page.content')
 

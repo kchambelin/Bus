@@ -18,9 +18,6 @@
                                 <li class="breadcrumb-item">
                                     <a class="text-muted">@yield('breadcumb.first.title')</a>
                                 </li>
-                                <li class="breadcrumb-item">
-                                    <a class="text-muted">@yield('breadcumb.second.title')</a>
-                                </li>
                             </ul>
                             <!--end::Breadcrumb-->
                         </div>
@@ -36,7 +33,7 @@
         <div class="topbar">
             <!--begin::User-->
             <div class="topbar-item">
-                <a href="#" class="text-dark-50 font-weight-bolder font-size-base d-none d-md-inline mr-3">Se connecter</a>
+                <a href="#" class="text-dark-50 font-weight-bolder font-size-base d-none d-md-inline mr-3">Log in</a>
             </div>
             <!--end::User-->
         </div>
