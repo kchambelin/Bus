@@ -28,6 +28,8 @@ Route::group([
         'prefix' => '/admin'
     ], function () {
 
+        Route::post('/create_bus', 'App\Http\Controllers\BusController@Create')
+            ->name('events.create');
 
     });
 
