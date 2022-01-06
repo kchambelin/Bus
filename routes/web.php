@@ -24,12 +24,6 @@ Route::get('/home', function () {
 })
     ->name('home');
 
-Route::get('/offers', function () {
-
-    return view('offers');
-})
-    ->name('offers');
-
 Route::get('/bus', function () {
 
     return view('bus');

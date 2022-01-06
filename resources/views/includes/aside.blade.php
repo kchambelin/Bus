@@ -35,12 +35,6 @@
                         <span class="menu-text">Home</span>
                     </a>
                 </li>
-                <li class="menu-item @if(Route::currentRouteName() == 'offers') menu-item-active @endif" aria-haspopup="true">
-                    <a href="{{ route('offers') }}" class="menu-link">
-                        <i class="menu-icon flaticon-map-location"></i>
-                        <span class="menu-text">Offers</span>
-                    </a>
-                </li>
                 <li class="menu-item @if(Route::currentRouteName() == 'bus') menu-item-active @endif" aria-haspopup="true">
                     <a href="{{ route('bus') }}" class="menu-link">
                         <i class="menu-icon flaticon-bus-stop"></i>
