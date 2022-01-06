@@ -30,11 +30,7 @@ Route::get('/bus', function () {
 })
     ->name('bus');
 
-Route::get('/manage_bus', function () {
 
-    return view('manage_bus');
-})
-    ->name('manage_bus');
 
 Route::get('/login', function () {
 
@@ -55,3 +51,12 @@ Route::get('auth/logout', 'App\Http\Controllers\Auth\LoginController@logout')->n
 Route::post('user/create', 'App\Http\Controllers\Auth\CreateUserController@Create');
 
 Route::get('display_buses', 'App\Http\Controllers\BusController@getBuses');
+
+Route::middleware('auth')->group( function () {
+    Route::get('/manage_bus', function () {
+
+        return view('manage_bus');
+    })
+        ->name('manage_bus')
+        ->middleware('permission:ADMIN');
+});

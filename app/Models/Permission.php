@@ -15,6 +15,6 @@ class Permission extends Model
     }
 
     public function operation() {
-        return $this->belongsTo(Operation::class, 'operation_id');
+        return $this->belongsTo(Operation::class, 'idoperation');
     }
 }
