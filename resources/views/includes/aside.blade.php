@@ -41,16 +41,18 @@
                         <span class="menu-text">Our buses</span>
                     </a>
                 </li>
-                <li class="menu-section">
-                    <h4 class="menu-text">Admin pages</h4>
-                    <i class="menu-icon ki ki-bold-more-hor icon-md"></i>
-                </li>
-                <li class="menu-item @if(Route::currentRouteName() == 'manage_bus') menu-item-active @endif" aria-haspopup="true">
-                    <a href="{{ route('manage_bus') }}" class="menu-link">
-                        <i class="menu-icon flaticon-settings"></i>
-                        <span class="menu-text">Bus management</span>
-                    </a>
-                </li>
+                @if (\App\Http\Middleware\Permission::hasOperation('SEE_ADMIN_PAGES'))
+                    <li class="menu-section">
+                        <h4 class="menu-text">Admin pages</h4>
+                        <i class="menu-icon ki ki-bold-more-hor icon-md"></i>
+                    </li>
+                    <li class="menu-item @if(Route::currentRouteName() == 'manage_bus') menu-item-active @endif" aria-haspopup="true">
+                        <a href="{{ route('manage_bus') }}" class="menu-link">
+                            <i class="menu-icon flaticon-settings"></i>
+                            <span class="menu-text">Bus management</span>
+                        </a>
+                    </li>
+                @endif
             </ul>
             <!--end::Menu Nav-->
         </div>
