@@ -54,6 +54,47 @@
     </div>
     <!--end::Entry-->
 
+    <div class="modal fade" id="Modal_OK" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdrop" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="ModalLabel">Booking</h5>
+                </div>
+                <div class="modal-body">
+                    <div class="row dflex align-items-center justify-content-center">
+                        <div class="col-xl-12">
+                            <button type="button" class="btn btn-light-success" disabled="disabled">Your place has been reserved.</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="To_second_step" class="btn btn-primary font-weight-bold" onclick="Refresh()">Refresh</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="Modal_NOK" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdrop" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="ModalLabel">Booking</h5>
+                </div>
+                <div class="modal-body">
+                    <div class="row dflex align-items-center justify-content-center">
+                        <div class="col-xl-12">
+                            <button type="button" class="btn btn-light-success" disabled="disabled">Something happened. Please try again.</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="To_second_step" class="btn btn-primary font-weight-bold" onclick="Refresh()">Refresh</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
 @endsection
 
 @section('page.script')
@@ -182,10 +223,16 @@
 
     function Book_ok() {
         console.log('OK');
+        $('#Modal_OK').modal('show');
     }
 
     function Book_not_ok() {
         console.log('Cheh');
+        $('#Modal_NOK').modal('show');
+    }
+
+    function Refresh() {
+        window.location.replace("{{route('bus')}}");
     }
 </script>
 @endsection
