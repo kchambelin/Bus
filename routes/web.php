@@ -24,12 +24,6 @@ Route::get('/home', function () {
 })
     ->name('home');
 
-Route::get('/offers', function () {
-
-    return view('offers');
-})
-    ->name('offers');
-
 Route::get('/bus', function () {
 
     return view('bus');
@@ -59,3 +53,5 @@ Route::get('auth/success', 'App\Http\Controllers\Auth\LoginController@successlog
 Route::get('auth/logout', 'App\Http\Controllers\Auth\LoginController@logout')->name('auth.logout');
 
 Route::post('user/create', 'App\Http\Controllers\Auth\CreateUserController@Create');
+
+Route::get('display_buses', 'App\Http\Controllers\BusController@getBuses');
