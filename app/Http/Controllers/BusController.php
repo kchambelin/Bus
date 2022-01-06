@@ -27,4 +27,11 @@ class BusController extends Controller
         );
 
     }
+
+    public function getBuses() {
+        
+        $buses = Bus::where('date', '>=', date("Y")."-".date("m")."-".date("d"))->get();
+        
+        return json_encode($buses);
+    }
 }

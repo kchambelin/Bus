@@ -10,7 +10,23 @@
     <div class="d-flex flex-column-fluid">
         <!--begin::Container-->
         <div class="container">
-
+            <?php
+                $host="localhost" ;
+                $port=27015;
+                $timeout=30;
+                try {
+                    $sk=fsockopen($host,$port,$errnum,$errstr,$timeout) ;
+                    if (!is_resource($sk)) {
+                        exit("connection fail: ".$errnum." ".$errstr) ;
+                    } else {
+                        echo "Connected";
+                        fputs($sk, "Bonjour");
+                    }
+                }
+                catch (Exception $e){
+                    echo "Connection failed: No connection.";
+                }
+            ?>
         </div>
         <!--end::Container-->
     </div>
