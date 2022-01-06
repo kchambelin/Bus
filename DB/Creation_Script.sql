@@ -47,6 +47,12 @@ CREATE TABLE bus (
     place_number int not null
 );
 
+CREATE TABLE books (
+    idbook int not null,
+    bus_idbus int not null,
+    users_iduser int not null
+);
+
 ALTER TABLE users ADD CONSTRAINT pk_users PRIMARY KEY (iduser);
 
 ALTER TABLE user_details ADD CONSTRAINT pk_user_details PRIMARY KEY (iduser_detail);
@@ -61,3 +67,7 @@ ALTER TABLE tokens ADD CONSTRAINT pk_tokens PRIMARY KEY (idtoken);
 ALTER TABLE tokens ADD CONSTRAINT fk_tokens_users FOREIGN KEY (users_iduser) REFERENCES users(iduser);
 
 ALTER TABLE bus ADD CONSTRAINT pk_bus PRIMARY KEY (idbus);
+
+ALTER TABLE books ADD CONSTRAINT pk_book PRIMARY KEY (idbook);
+ALTER TABLE books ADD CONSTRAINT fk_books_bus FOREIGN KEY (bus_idbus) REFERENCES bus(idbus);
+ALTER TABLE books ADD CONSTRAINT fk_books_users FOREIGN KEY (users_iduser) REFERENCES users(iduser);

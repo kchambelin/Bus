@@ -24,6 +24,9 @@ Route::group([
     'middleware' => 'apitoken'
 ], function () {
 
+    Route::post('/book', 'App\Http\Controllers\BusController@Book',  ['middleware' => 'auth'])
+        ->name('book');
+
     Route::group([
         'prefix' => '/admin'
     ], function () {

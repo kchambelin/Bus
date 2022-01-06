@@ -5,7 +5,14 @@
 @section('breadcumb.first.title', 'BUS')
 
 @section('page.content')
-
+    <?php
+        $user = Auth::user();
+        if (!$user) {
+            $user_id = -1;
+        } else {
+            $user_id = $user->iduser;
+        }
+    ?>
     <!--begin::Entry-->
     <div class="d-flex flex-column-fluid">
         <!--begin::Container-->
@@ -31,6 +38,7 @@
                                             <th>From</th>
                                             <th>To</th>
                                             <th>Places</th>
+                                            <th>Places remaining</th>
                                             <th>Book</th>
                                         </tr>
                                     </thead>
@@ -112,8 +120,15 @@
                         data: 'place_number',
                     },
                     {
+                        data: 'places_remaining',
+                    },
+                    {
                         data: function (row, type, val, meta) {
-                            return '<button type="button" class="btn btn-light-primary font-weight-bold" onclick="book(' + row.idbus + ')">Book seats</button>';
+                            if (row.places_remaining == 0) {
+                                return '<button type="button" class="btn btn-light-danger font-weight-bold">Full</button>';
+                            } else {
+                                return '<button type="button" class="btn btn-light-primary font-weight-bold" onclick="book(' + row.idbus + ')">Book a seat</button>';
+                            }
                         },
                         width: '130px'
                     }
@@ -143,6 +158,34 @@
 
     function book(bus) {
         console.log(bus);
+        $.ajax({
+            url:  "/api/v1/book",
+            type: 'POST',
+            headers:{
+                'token':token,
+            },
+            data:{
+                'iduser' : {{$user_id}},
+                'idbus' : bus,
+            },
+            success: function (response) {
+                console.log(response);
+                if (response == 0) {
+                    Book_ok();
+                }
+                else {
+                    Book_not_ok();
+                }
+            }
+        })
+    }
+
+    function Book_ok() {
+        console.log('OK');
+    }
+
+    function Book_not_ok() {
+        console.log('Cheh');
     }
 </script>
 @endsection
