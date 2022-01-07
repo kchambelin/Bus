@@ -1,0 +1,28 @@
+\babel@toc {american}{}
+\contentsline {section}{\numberline {I)}The global architecture of the website}{3}{section.0.1}%
+\contentsline {subsection}{\numberline {1)}A website...}{3}{subsection.0.1.1}%
+\contentsline {subsection}{\numberline {2)}...but not alone}{5}{subsection.0.1.2}%
+\contentsline {section}{\numberline {II)}The database}{5}{section.0.2}%
+\contentsline {subsection}{\numberline {1)}Create the database}{5}{subsection.0.2.1}%
+\contentsline {subsection}{\numberline {2)}Tables glossary}{7}{subsection.0.2.2}%
+\contentsline {subsubsection}{\numberline {a)}Table users}{7}{subsubsection.0.2.2.1}%
+\contentsline {subsubsection}{\numberline {b)}Table user\_details}{7}{subsubsection.0.2.2.2}%
+\contentsline {subsubsection}{\numberline {c)}Table operations}{8}{subsubsection.0.2.2.3}%
+\contentsline {subsubsection}{\numberline {d)}Table permissions}{8}{subsubsection.0.2.2.4}%
+\contentsline {subsubsection}{\numberline {e)}Table tokens}{8}{subsubsection.0.2.2.5}%
+\contentsline {subsubsection}{\numberline {f)}Table bus}{8}{subsubsection.0.2.2.6}%
+\contentsline {subsubsection}{\numberline {g)}Table books}{8}{subsubsection.0.2.2.7}%
+\contentsline {section}{\numberline {III)}The website part}{10}{section.0.3}%
+\contentsline {subsection}{\numberline {1)}Global architecture using Laravel Framework}{10}{subsection.0.3.1}%
+\contentsline {subsection}{\numberline {2)}The login system}{11}{subsection.0.3.2}%
+\contentsline {subsubsection}{\numberline {a)}The login page}{11}{subsubsection.0.3.2.1}%
+\contentsline {subsubsection}{\numberline {b)}Login management}{12}{subsubsection.0.3.2.2}%
+\contentsline {subsubsection}{\numberline {c)}Creating an account}{12}{subsubsection.0.3.2.3}%
+\contentsline {subsection}{\numberline {3)}Permissions management}{17}{subsection.0.3.3}%
+\contentsline {subsubsection}{\numberline {a)}In the database}{17}{subsubsection.0.3.3.1}%
+\contentsline {subsubsection}{\numberline {b)}In the website}{17}{subsubsection.0.3.3.2}%
+\contentsline {subsection}{\numberline {4)}Create a bus}{20}{subsection.0.3.4}%
+\contentsline {subsection}{\numberline {5)}The booking system -- website side}{24}{subsection.0.3.5}%
+\contentsline {subsubsection}{\numberline {a)}Display all the available buses}{24}{subsubsection.0.3.5.1}%
+\contentsline {subsubsection}{\numberline {b)}Booking function}{27}{subsubsection.0.3.5.2}%
+\contentsline {section}{\numberline {IV)}The Cpp server}{28}{section.0.4}%

@@ -49,6 +49,8 @@
 </div>
 <!--end::Main-->
 
+@include('includes.userprofile')
+
 <!--begin::Scrolltop-->
 @include('includes.scrolltop')
 <!--end::Scrolltop-->
@@ -63,7 +65,7 @@
 <script src="{{asset('assets/js/scripts.bundle.js')}}"></script>
 <!--end::Global Theme Bundle-->
 @if(\Illuminate\Support\Facades\Auth::check())
-<script>var token = "{{\App\Models\UserToken::where('logins_idlogin', Auth::user()->idlogin)->first()->token}}"</script>
+<script>var token = "{{\App\Models\UserToken::where('users_iduser', Auth::user()->iduser)->first()->token}}"</script>
 @endif
 
 @yield('page.script')

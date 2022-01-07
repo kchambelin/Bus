@@ -18,15 +18,21 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+
 Route::group([
     'prefix' => '/v1',
     'middleware' => 'apitoken'
 ], function () {
 
+    Route::post('/book', 'App\Http\Controllers\BusController@Book',  ['middleware' => 'auth'])
+        ->name('book');
+
     Route::group([
         'prefix' => '/admin'
     ], function () {
 
+        Route::post('/create_bus', 'App\Http\Controllers\BusController@Create')
+            ->name('events.create');
 
     });
 
