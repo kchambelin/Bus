@@ -56,12 +56,12 @@ int server::init() {
     }
  
     if( gethostname( HostName, 100 ) == SOCKET_ERROR ){
-        std::cerr<< "gethostname() a rencontré l'erreur "<< WSAGetLastError()  << std::endl;
+        std::cerr<< "gethostname() failed: "<< WSAGetLastError()  << std::endl;
         return 1;
     }
  
     if( (host = gethostbyname( HostName ) ) == NULL){
-        std::cerr <<"gethostbyname() a rencontré l'erreur "<< WSAGetLastError()<< std::endl;
+        std::cerr <<"gethostbyname() failed "<< WSAGetLastError()<< std::endl;
         return 1;
     }
  
@@ -71,7 +71,7 @@ int server::init() {
     ServerAddr.sin_port = htons( port );    
     ServerAddr.sin_addr.s_addr = inet_addr( inet_ntoa( MyAddress ) );
  
-    std::cout <<"server correctement initialisé" << std::endl;    
+    std::cout <<"server initialized" << std::endl;    
     return 0;  
 }
 
@@ -83,33 +83,33 @@ int server::start() {
     struct thread_param p;
  
     if( ( ListeningSocket = socket( PF_INET, SOCK_STREAM, IPPROTO_TCP ) ) == INVALID_SOCKET ){
-        std::cerr <<"ne peut créer la socket. Erreur n° " << WSAGetLastError()<< std::endl;
+        std::cerr <<"Can't create the socket. Error number " << WSAGetLastError()<< std::endl;
         WSACleanup();
         return 1;
     }
 
     if( bind( ListeningSocket, (SOCKADDR *)&ServerAddr, sizeof( ServerAddr ) ) == SOCKET_ERROR ){
-        std::cerr<<"bind a échoué avec l'erreur "<< WSAGetLastError()<< std::endl;
-        std::cerr<<"Le port est peut-être déjà utilisé par un autre processus "<< std::endl;
+        std::cerr<<"bind failed: "<< WSAGetLastError()<< std::endl;
+        std::cerr<<"Port already used "<< std::endl;
         closesocket( ListeningSocket );
         WSACleanup();
         return 1;
     }
 
     if( listen( ListeningSocket, 5 ) == SOCKET_ERROR ){
-        std::cerr<<"listen a échoué avec l'erreur "<< WSAGetLastError()<< std::endl;
+        std::cerr<<"listen failed "<< WSAGetLastError()<< std::endl;
         closesocket( ListeningSocket );
         WSACleanup();
         return 1;
     }
 
-    std::cout <<"serveur démarré : à l'écoute du port "<<port<< std::endl; 
+    std::cout <<"server started: listening "<<port<< std::endl; 
     running = true;
     ClientAddrLen = sizeof( ClientAddr );
  
     while(running){
         if((NewConnection = accept( ListeningSocket, (SOCKADDR *) &ClientAddr, &ClientAddrLen)) == INVALID_SOCKET){
-            std::cerr  <<"accept a échoué avec l'erreur "<< WSAGetLastError() << std::endl;;
+            std::cerr  <<"accept failed: "<< WSAGetLastError() << std::endl;;
             closesocket( ListeningSocket );
             WSACleanup();
             return 1;
@@ -118,11 +118,9 @@ int server::start() {
         p.ser = this;
         p.soc = NewConnection;
  
-        std::cout << "client connecté ::  IP : "<<inet_ntoa( ClientAddr.sin_addr )<< " ,port = "<<ntohs( ClientAddr.sin_port )<< std::endl;
- 
         hProcessThread = CreateThread(NULL, 0,&server::ThreadLauncher, &p,0,NULL);
         if ( hProcessThread == NULL ){                       
-            std::cerr <<"CreateThread a échoué avec l'erreur "<<GetLastError()<< std::endl;
+            std::cerr <<"CreateThread failed "<<GetLastError()<< std::endl;
         }
 
     }   
@@ -137,7 +135,6 @@ int server::pause() {
 }
 
 DWORD server::ClientThread(SOCKET soc) {
-    std::cout << "Client Thread launched" << std::endl;
     m.lock();
     int iSendResult, iResult;
     iSendResult = send(soc, "1", iResult, 0);
