@@ -42,16 +42,16 @@ class BusController extends Controller
         $id_bus = $request->input('idbus');
         $id_user = $request->input('iduser');
 
-        // $fp = fsockopen("localhost", 27015, $errno, $errstr);
-        // if (!$fp) {
-        //     return -1;
-        // }
-        // $is_ok = 0;
-        // while ($is_ok != 1) {
-        //     $is_ok = fread($fp, 10);
-        // }
+        $fp = fsockopen("localhost", 27015, $errno, $errstr);
+        if (!$fp) {
+            return -1;
+        }
+        $is_ok = 0;
+        while ($is_ok != 1) {
+            $is_ok = fread($fp, 10);
+        }
 
-        // fclose($fp);
+        fclose($fp);
 
         $purchased_places = Books::selectRaw('count(idbook) as places')
                                     ->where('bus_idbus', '=', $id_bus)
